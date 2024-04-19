@@ -13,8 +13,8 @@
 Создайте в jenkins Freestyle Project, подключите получившийся репозиторий к нему и произведите запуск тестов и сборку проекта go test . и docker build ..
 В качестве ответа пришлите скриншоты с настройками проекта и результатами выполнения сборки.
 
-1. `Ссылка на выполнение команд из задания https://github.com/Semergal/8-03-hw/blob/main/img/Screenshot_1.jpg`
-
+1. `Ссылка на выполнение команд из задания `
+![alt text](https://github.com/Semergal/8-03-hw/blob/main/img/Screenshot_1.jpg)
 
 ```
 Поле для вставки кода...
