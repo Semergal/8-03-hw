@@ -17,7 +17,7 @@
 Приложите в файл README.md текст использованных команд в GitHub.
 
 1. `Выполнение команд из задания `
-![alt text](https://github.com/Semergal/8-03-hw/blob/main/img/Screenshot_1.jpg)
+![alt text](https://github.com/Semergal/8-03-hw/blob/main/img/Screenshot_11.jpg)
 
 
 Использовал инструкцию с офф сайта
