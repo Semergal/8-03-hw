@@ -1,27 +1,73 @@
-# Домашнее задание к занятию "`Что такое DevOps. СI/СD`" - `Трошин Константин`
+# Домашнее задание к занятию «Система мониторинга Zabbix» - `Трошин Константин`
 
 
 ---
 
 ### Задание 1
 
-Что нужно сделать:
+Установите Zabbix Server с веб-интерфейсом.
 
-`Установите себе jenkins по инструкции из лекции или любым другим способом из официальной документации. Использовать Docker в этом задании нежелательно.
-Установите на машину с jenkins golang.
-Используя свой аккаунт на GitHub, сделайте себе форк репозитория. В этом же репозитории находится дополнительный материал для выполнения ДЗ.
-Создайте в jenkins Freestyle Project, подключите получившийся репозиторий к нему и произведите запуск тестов и сборку проекта go test . и docker build ..
-В качестве ответа пришлите скриншоты с настройками проекта и результатами выполнения сборки.
+Процесс выполнения
+Выполняя ДЗ, сверяйтесь с процессом отражённым в записи лекции.
+Установите PostgreSQL. Для установки достаточна та версия, что есть в системном репозитороии Debian 11.
+Пользуясь конфигуратором команд с официального сайта, составьте набор команд для установки последней версии Zabbix с поддержкой PostgreSQL и Apache.
+Выполните все необходимые команды для установки Zabbix Server и Zabbix Web Server.
+Требования к результаты
+Прикрепите в файл README.md скриншот авторизации в админке.
+Приложите в файл README.md текст использованных команд в GitHub.
 
 1. `Выполнение команд из задания `
 ![alt text](https://github.com/Semergal/8-03-hw/blob/main/img/Screenshot_1.jpg)
 
-### Задание 2
-Что нужно сделать:
 
-Создайте новый проект pipeline.
-Перепишите сборку из задания 1 на declarative в виде кода.
-В качестве ответа пришлите скриншоты с настройками проекта и результатами выполнения сборки.
+Использовал инструкцию с офф сайта
+
+Установите и сконфигурируйте Zabbix для выбранной платформы
+a. Установите репозиторий Zabbix
+Документация
+# wget https://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_6.0-5+debian12_all.deb
+# dpkg -i zabbix-release_6.0-5+debian12_all.deb
+# apt update
+b. Установите Zabbix сервер, веб-интерфейс и агент
+# apt install zabbix-server-pgsql zabbix-frontend-php php8.2-pgsql zabbix-apache-conf zabbix-sql-scripts zabbix-agent
+c. Создайте базу данных
+Документация
+Установите и запустите сервер базы данных.
+
+Выполните следующие комманды на хосте, где будет распологаться база данных.
+
+# sudo -u postgres createuser --pwprompt zabbix
+# sudo -u postgres createdb -O zabbix zabbix
+На хосте Zabbix сервера импортируйте начальную схему и данные. Вам будет предложено ввести недавно созданный пароль.
+
+# zcat /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz | sudo -u zabbix psql zabbix
+d. Настройте базу данных для Zabbix сервера
+Отредактируйте файл /etc/zabbix/zabbix_server.conf
+
+DBPassword=password
+e. Запустите процессы Zabbix сервера и агента
+Запустите процессы Zabbix сервера и агента и настройте их запуск при загрузке ОС.
+
+# systemctl restart zabbix-server zabbix-agent apache2
+# systemctl enable zabbix-server zabbix-agent apache2
+f. Open Zabbix UI web page
+The default URL for Zabbix UI when using Apache web server is http://host/zabbix
+
+
+### Задание 2
+Установите Zabbix Agent на два хоста.
+
+Процесс выполнения
+Выполняя ДЗ, сверяйтесь с процессом отражённым в записи лекции.
+Установите Zabbix Agent на 2 вирт.машины, одной из них может быть ваш Zabbix Server.
+Добавьте Zabbix Server в список разрешенных серверов ваших Zabbix Agentов.
+Добавьте Zabbix Agentов в раздел Configuration > Hosts вашего Zabbix Servera.
+Проверьте, что в разделе Latest Data начали появляться данные с добавленных агентов.
+Требования к результаты
+Приложите в файл README.md скриншот раздела Configuration > Hosts, где видно, что агенты подключены к серверу
+Приложите в файл README.md скриншот лога zabbix agent, где видно, что он работает с сервером
+Приложите в файл README.md скриншот раздела Monitoring > Latest data для обоих хостов, где видны поступающие от агентов данные.
+Приложите в файл README.md текст использованных команд в GitHub
 
 ![alt text](https://github.com/Semergal/8-03-hw/blob/main/img/Screenshot_2.jpg)
 ![alt text](https://github.com/Semergal/8-03-hw/blob/main/img/Screenshot_3.jpg)
