@@ -17,7 +17,7 @@
 2. Приложите в файл README.md текст использованных команд в GitHub.
 
 ### Решение
-![alt text](https://github.com/Semergal/8-03-hw/blob/main/img/Screenshot_11.jpg)
+![alt text](https://github.com/Semergal/8-03-hw/blob/main/img/Screenshot_1.jpg)
 
 
 ### Использовал инструкцию с офф сайта
