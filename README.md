@@ -20,7 +20,7 @@
 ![alt text](https://github.com/Semergal/8-03-hw/blob/main/img/Screenshot_1.jpg)
 
 
-### Использовал инструкцию с офф сайта
+#### Использовал инструкцию с офф сайта
 
 1. wget https://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_6.0-5+debian12_all.deb
 2. dpkg -i zabbix-release_6.0-5+debian12_all.deb
@@ -49,73 +49,16 @@
 3. Приложите в файл README.md скриншот раздела Monitoring > Latest data для обоих хостов, где видны поступающие от агентов данные.
 4. Приложите в файл README.md текст использованных команд в GitHub
 
+
+### Решение
 ![alt text](https://github.com/Semergal/8-03-hw/blob/main/img/Screenshot_2.jpg)
 ![alt text](https://github.com/Semergal/8-03-hw/blob/main/img/Screenshot_3.jpg)
 ![alt text](https://github.com/Semergal/8-03-hw/blob/main/img/Screenshot_4.jpg)
-```
-pipeline {
- agent any
- stages {
-  stage('Git') {
-   steps {git 'https://github.com/Semergal/sdvps-materials8.git'}
-  }
-  stage('Test') {
-   steps {
-    sh '/usr/local/go/bin/go test .'
-   }
-  }
-  stage('Build') {
-   steps {
-    sh 'docker build -f Dockerfile .'
-   }
-  }
- }
-}
-```
 
----
-
-### Задание 3
-
-Что нужно сделать:
-
-Установите на машину Nexus.
-Создайте raw-hosted репозиторий.
-Измените pipeline так, чтобы вместо Docker-образа собирался бинарный go-файл. Команду можно скопировать из Dockerfile.
-Загрузите файл в репозиторий с помощью jenkins.
-В качестве ответа пришлите скриншоты с настройками проекта и результатами выполнения сборки.
-
-![alt text](https://github.com/Semergal/8-03-hw/blob/main/img/Screenshot_5.jpg)
-![alt text](https://github.com/Semergal/8-03-hw/blob/main/img/Screenshot_6.jpg)
-
-```
-pipeline {
-    agent any
-    environment {
-        PATH = "/usr/local/go/bin:${env.PATH}"
-    }
-    stages {
-        stage('Checkout') {
-            steps {
-                script {
-                    git 'https://github.com/netology-code/sdvps-materials.git'
-                }
-            }
-        }
-        stage('Build Go Binary') {
-            steps {
-                script {
-                    sh 'CGO_ENABLED=0 GOOS=linux go build -a -installsuffix nocgo -o app .'
-                }
-            }
-        }
-        stage('Upload to Nexus') {
-            steps {
-                script {
-                    sh 'curl -v --user admin:admin --upload-file app http://192.168.1.56:8081/repository/8-02/'
-                }
-            }
-        }
-    }
-}
-```
+#### Использовал инструкцию с офф сайта
+1. wget https://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_6.0-5+debian12_all.deb
+2. dpkg -i zabbix-release_6.0-5+debian12_all.deb
+3. apt update
+4. apt install zabbix-agent
+5. systemctl restart zabbix-agent
+6. systemctl enable zabbix-agent
