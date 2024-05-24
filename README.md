@@ -20,45 +20,37 @@
 ![alt text](https://github.com/Semergal/8-03-hw/blob/main/img/Screenshot_1.jpg)
 
 
-#### Использовал инструкцию с офф сайта
-
-1. wget https://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_6.0-5+debian12_all.deb
-2. dpkg -i zabbix-release_6.0-5+debian12_all.deb
-3. apt update
-4. apt install zabbix-server-pgsql zabbix-frontend-php php8.2-pgsql zabbix-apache-conf zabbix-sql-scripts zabbix-agent
-5. sudo -u postgres createuser --pwprompt zabbix
-6. sudo -u postgres createdb -O zabbix zabbix
-7. zcat /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz | sudo -u zabbix psql zabbix
-8. systemctl restart zabbix-server zabbix-agent apache2
-9. systemctl enable zabbix-server zabbix-agent apache2
-
-
 
 ### Задание 2
-Установите Zabbix Agent на два хоста.
+Добавьте в Zabbix два хоста и задайте им имена <фамилия и инициалы-1> и <фамилия и инициалы-2>. Например: ivanovii-1 и ivanovii-2.
 
 #### Процесс выполнения
-1. Выполняя ДЗ, сверяйтесь с процессом отражённым в записи лекции.
-2. Установите Zabbix Agent на 2 вирт.машины, одной из них может быть ваш Zabbix Server.
-3. Добавьте Zabbix Server в список разрешенных серверов ваших Zabbix Agentов.
-4. Добавьте Zabbix Agentов в раздел Configuration > Hosts вашего Zabbix Servera.
-5. Проверьте, что в разделе Latest Data начали появляться данные с добавленных агентов.
+1. Выполняя ДЗ сверяйтесь с процессом отражённым в записи лекции.
+2. Установите Zabbix Agent на 2 виртмашины, одной из них может быть ваш Zabbix Server
+3. Добавьте Zabbix Server в список разрешенных серверов ваших Zabbix Agentов
+4. Добавьте Zabbix Agentов в раздел Configuration > Hosts вашего Zabbix Servera
+5. Прикрепите за каждым хостом шаблон Linux by Zabbix Agent
+6. Проверьте что в разделе Latest Data начали появляться данные с добавленных агентов
 #### Требования к результаты
-1. Приложите в файл README.md скриншот раздела Configuration > Hosts, где видно, что агенты подключены к серверу
-2. Приложите в файл README.md скриншот лога zabbix agent, где видно, что он работает с сервером
-3. Приложите в файл README.md скриншот раздела Monitoring > Latest data для обоих хостов, где видны поступающие от агентов данные.
-4. Приложите в файл README.md текст использованных команд в GitHub
+Результат данного задания сдавайте вместе с заданием 3
 
+
+### Задание 3
+Привяжите созданный шаблон к двум хостам. Также привяжите к обоим хостам шаблон Linux by Zabbix Agent.
+
+#### Процесс выполнения
+1. Выполняя ДЗ сверяйтесь с процессом отражённым в записи лекции.
+2. Зайдите в настройки каждого хоста и в разделе Templates прикрепите к этому хосту ваш шаблон
+3. Так же к каждому хосту привяжите шаблон Linux by Zabbix Agent
+4. Проверьте что в раздел Latest Data начали поступать необходимые данные из вашего шаблона
+#### Требования к результаты
+Результат данного задания сдавайте вместе с заданием 3
 
 ### Решение
+По 2 пункту есть проблема в новой версии забикса нельзя прикрутить шаблон с item который уже есть в другом шаблоне, а именно из пункта 3 Linux by Zabbix Agent
 ![alt text](https://github.com/Semergal/8-03-hw/blob/main/img/Screenshot_2.jpg)
-![alt text](https://github.com/Semergal/8-03-hw/blob/main/img/Screenshot_3.jpg)
-![alt text](https://github.com/Semergal/8-03-hw/blob/main/img/Screenshot_4.jpg)
 
-#### Использовал инструкцию с офф сайта
-1. wget https://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_6.0-5+debian12_all.deb
-2. dpkg -i zabbix-release_6.0-5+debian12_all.deb
-3. apt update
-4. apt install zabbix-agent
-5. systemctl restart zabbix-agent
-6. systemctl enable zabbix-agent
+![alt text](https://github.com/Semergal/8-03-hw/blob/main/img/Screenshot_3.jpg)
+
+Данные поступают
+![alt text](https://github.com/Semergal/8-03-hw/blob/main/img/Screenshot_4.jpg)
